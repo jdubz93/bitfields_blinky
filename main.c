@@ -9,13 +9,12 @@ void clearBits(GPIOx_MODE_REGSTR_t *pModeReg, GPIO_OUTPUT_DATA_REGSTR_t *pOutput
 
 int main(void)
 {
-    RCC_AHB1ENR_t *pAhb1enr;
-    pAhb1enr = (RCC_AHB1ENR_t*)0x40023830;
+    RCC_AHB1ENR_t volatile *const pAhb1enr = (RCC_AHB1ENR_t*)0x40023830;
 
-    GPIOx_MODE_REGSTR_t *pGpiodModePtr;
+    GPIOx_MODE_REGSTR_t volatile *pGpiodModePtr;
     pGpiodModePtr = (GPIOx_MODE_REGSTR_t*)0x40020C00;
 
-    GPIO_OUTPUT_DATA_REGSTR_t *pGpioOutputData;
+    GPIO_OUTPUT_DATA_REGSTR_t volatile *pGpioOutputData;
     pGpioOutputData = (GPIO_OUTPUT_DATA_REGSTR_t*)0x40020C14;
 
     pAhb1enr->gpio_d_en = 1;
@@ -36,6 +35,7 @@ int main(void)
 
 void ledOn(GPIOx_MODE_REGSTR_t *pModeReg, GPIO_OUTPUT_DATA_REGSTR_t *pOutputData) 
 {
+    // uint32_t test = LED::ON;
     clearBits(pModeReg, pOutputData);
     // set pint 5
     pModeReg->moder_5 = 1;

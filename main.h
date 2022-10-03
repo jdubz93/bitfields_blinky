@@ -75,4 +75,13 @@ typedef struct
     uint32_t reserved   :15;
 } GPIO_OUTPUT_DATA_REGSTR_t;
 
+enum LED {
+    OFF = (uint32_t)0,
+    ON = (uint32_t)1
+};
+// typedef enum : uint32_t {
+//     OFF,
+//     ON
+// } LED_t;
+
 #endif /* MAIN_H_ */
